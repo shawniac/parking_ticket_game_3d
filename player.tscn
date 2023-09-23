@@ -1,0 +1,121 @@
+[gd_scene load_steps=15 format=3 uid="uid://s01udkh8qwlg"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_01nou"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_svhep"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rblca"]
+albedo_color = Color(0.968627, 0.631373, 0.639216, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_j073e"]
+material = SubResource("StandardMaterial3D_rblca")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jf8pq"]
+radius = 0.05
+height = 0.25
+
+[sub_resource type="TorusMesh" id="TorusMesh_auf1j"]
+inner_radius = 0.029
+outer_radius = 0.066
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_funq8"]
+radius = 0.1
+height = 0.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3p2pt"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ri4ki"]
+size = Vector3(0.15, 0.15, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qp0xx"]
+albedo_color = Color(0, 0.0705882, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_30io7"]
+material = SubResource("StandardMaterial3D_qp0xx")
+top_radius = 0.1
+height = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yaac8"]
+albedo_color = Color(0, 0.0705882, 1, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_wtav0"]
+material = SubResource("StandardMaterial3D_yaac8")
+size = Vector3(0.1, 0.35, 0.75)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nmq7v"]
+radius = 2.0
+
+[node name="Player" type="CharacterBody3D"]
+floor_stop_on_slope = false
+script = ExtResource("1_01nou")
+
+[node name="BodyParts" type="Node3D" parent="."]
+
+[node name="Torso" type="MeshInstance3D" parent="BodyParts"]
+mesh = SubResource("CapsuleMesh_svhep")
+skeleton = NodePath("../..")
+
+[node name="ButtLeft" type="MeshInstance3D" parent="BodyParts"]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, -0.1, -0.25, 0.5)
+mesh = SubResource("SphereMesh_j073e")
+skeleton = NodePath("../../..")
+
+[node name="ButtRight" type="MeshInstance3D" parent="BodyParts"]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0.1, -0.25, 0.5)
+mesh = SubResource("SphereMesh_j073e")
+skeleton = NodePath("../../..")
+
+[node name="EyeRight" type="MeshInstance3D" parent="BodyParts"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.15, 0.55, -0.45)
+mesh = SubResource("SphereMesh_j073e")
+skeleton = NodePath("../..")
+
+[node name="EyeLeft" type="MeshInstance3D" parent="BodyParts"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.15, 0.55, -0.45)
+mesh = SubResource("SphereMesh_j073e")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BodyParts"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.437026, -0.500253)
+mesh = SubResource("CapsuleMesh_jf8pq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="BodyParts"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.300514, -0.523789)
+mesh = SubResource("TorusMesh_auf1j")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="BodyParts"]
+transform = Transform3D(0.991644, -0.129003, 0, 0.129003, 0.991644, 0, 0, 0, 1, 0.442322, -0.765714, -0.0504146)
+mesh = SubResource("CapsuleMesh_funq8")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="BodyParts"]
+transform = Transform3D(0.981437, 0.191785, 0, -0.191785, 0.981437, 0, 0, 0, 1, -0.43142, -0.765714, -0.0504146)
+mesh = SubResource("CapsuleMesh_funq8")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_3p2pt")
+
+[node name="Gun" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 1.49012e-08, 0, -1.49012e-08, 1, 0.301335, 0.224111, -0.535277)
+mesh = SubResource("BoxMesh_ri4ki")
+
+[node name="Hat" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00872, 0)
+mesh = SubResource("CylinderMesh_30io7")
+
+[node name="Rim" type="MeshInstance3D" parent="Hat"]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 1, 1.91069e-15, -4.37114e-08, 0, -1, -4.37114e-08, 0, -0.143424, -0.424074)
+mesh = SubResource("PrismMesh_wtav0")
+skeleton = NodePath("../..")
+
+[node name="CameraMount" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -0.0030551, 1, 0.000671625)
+
+[node name="ThirdPersonCamera" type="Camera3D" parent="CameraMount"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="ObjectDetector" type="Area3D" parent="."]
+
+[node name="DetectorShape" type="CollisionShape3D" parent="ObjectDetector"]
+shape = SubResource("SphereShape3D_nmq7v")
+
+[connection signal="body_entered" from="ObjectDetector" to="." method="_on_object_detector_body_entered"]

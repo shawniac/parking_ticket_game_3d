@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwdyo1n7a6186"]
+
+[ext_resource type="ArrayMesh" uid="uid://dmt5om32uv8ys" path="res://addons/kaykit_city_builder_bits/Assets/obj/road_junction.obj" id="1_b0sj3"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_r5267"]
+points = PackedVector3Array(1.01587, 0.111099, 1.01587, -1.01587, -0.015873, -1.01587, -1.01587, -0.015873, 1.01587, -1.01587, 0.111099, -1.01587, 1.01587, -0.015873, -1.01587, -1.01587, 0.111099, 1.01587, 1.01587, -0.015873, 1.01587, 1.01587, 0.111099, -1.01587)
+
+[node name="Street" type="StaticBody3D"]
+metadata/_edit_group_ = true
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_b0sj3")
+skeleton = NodePath("../../../..")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_r5267")
