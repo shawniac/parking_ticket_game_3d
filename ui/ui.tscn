@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2y1qnjbn1ybh"]
+[gd_scene load_steps=2 format=3 uid="uid://b2y1qnjbn1ybh"]
 
-[ext_resource type="Texture2D" uid="uid://ffiieiqbr2wu" path="res://icon.svg" id="1_iac4f"]
-[ext_resource type="Script" path="res://minimap.gd" id="2_wmfl2"]
+[ext_resource type="Script" path="res://ui/minimap.gd" id="2_g7wji"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -17,5 +16,4 @@ offset_left = 42.0
 offset_top = 770.0
 offset_right = 310.0
 offset_bottom = 1038.0
-texture = ExtResource("1_iac4f")
-script = ExtResource("2_wmfl2")
+script = ExtResource("2_g7wji")

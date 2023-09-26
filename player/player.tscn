@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://s01udkh8qwlg"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_01nou"]
+[ext_resource type="Script" path="res://player/player.gd" id="1_f41qd"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_svhep"]
 
@@ -47,7 +47,7 @@ radius = 2.0
 
 [node name="Player" type="CharacterBody3D"]
 floor_stop_on_slope = false
-script = ExtResource("1_01nou")
+script = ExtResource("1_f41qd")
 
 [node name="BodyParts" type="Node3D" parent="."]
 
