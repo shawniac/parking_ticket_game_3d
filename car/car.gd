@@ -1,11 +1,13 @@
 extends VehicleBody3D
 
+const STEER_DAMPENING := 0.6
+
 @onready var camera := $Camera3D
 
 var is_player_inside := false
 
-var max_rpm := 250
-var max_torque := 200
+@export var max_rpm := 250
+@export var max_torque := 200
 
 
 func use(player: CharacterBody3D) -> void:
@@ -18,15 +20,19 @@ func use(player: CharacterBody3D) -> void:
     camera.current = true
 
     # move the player
-    player.position = Vector3(0, -10, 0)
+    player.position = Vector3(0, -1, 0)
     #player.reparent(self)
 
 
 func _physics_process(delta: float) -> void:
     if is_player_inside:
-        # get user input
-        steering = lerp(steering, Input.get_axis("right", "left") * 0.4, 5 * delta)
+        # get user input and steer
         var acceleration = Input.get_axis("backward", "forward")
+        steering = lerp(steering, Input.get_axis("right", "left") * STEER_DAMPENING, 5 * delta)
+
+        # handbrake
+        if Input.is_action_pressed("handbrake"):
+            linear_velocity = Vector3.ZERO
 
         # apply torque
         var rpm: float = abs($WheelRearLeft.get_rpm())

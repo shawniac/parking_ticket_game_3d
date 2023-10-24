@@ -3,7 +3,6 @@ extends CharacterBody3D
 # node variables
 @onready var camera_mount := $CameraMount
 @onready var camera := $CameraMount/ThirdPersonCamera
-var detected_object: Object
 var current_car: Object
 
 # physics constants
@@ -31,7 +30,7 @@ func _ready() -> void:
 func _process(_delta) -> void:
     rotate_y(twist_input)
     camera_mount.rotate_x(pitch_input)
-    camera_mount.rotation.x = clamp(camera_mount.rotation.x, -0.5, 0.5)
+    camera_mount.rotation.x = clamp(camera_mount.rotation.x, -0.75, 0.75)
 
     # reset the camera rotation
     twist_input = 0.0
@@ -41,6 +40,8 @@ func _process(_delta) -> void:
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed("reset"):
         get_tree().reload_current_scene()
+    elif event.is_action_pressed("emergency_kill"):
+        get_tree().quit()
 
     if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
         if not is_inside_car:
@@ -54,9 +55,6 @@ func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed("use"):
         if is_inside_car:
             leave_car()
-        else:
-            if detected_object:
-                detected_object.use(self)
 
 
 func _physics_process(delta: float) -> void:
@@ -87,11 +85,6 @@ func _physics_process(delta: float) -> void:
     move_and_slide()
 
 
-func _on_object_detector_body_entered(body: PhysicsBody3D) -> void:
-    if "Car" in body.name:
-        print("detected car with name: " + body.name)
-        detected_object = body
-
 func leave_car() -> void:
     # player settings
     is_inside_car = false
@@ -101,4 +94,5 @@ func leave_car() -> void:
     current_car.is_player_inside = false
 
     # move the player
+    position = Vector3(0, 1, 0)
     #self.reparent(get_tree().current_scene)

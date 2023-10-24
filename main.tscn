@@ -22,6 +22,10 @@ sky_material = SubResource("ProceduralSkyMaterial_ssbfq")
 background_mode = 2
 sky = SubResource("Sky_f7wer")
 tonemap_mode = 2
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
 glow_enabled = true
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_r5267"]

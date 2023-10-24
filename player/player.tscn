@@ -1,6 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://s01udkh8qwlg"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_f41qd"]
+[ext_resource type="Script" path="res://player/interactray.gd" id="2_oyf6v"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_svhep"]
 
@@ -41,9 +42,6 @@ albedo_color = Color(0, 0.0705882, 1, 1)
 [sub_resource type="PrismMesh" id="PrismMesh_wtav0"]
 material = SubResource("StandardMaterial3D_yaac8")
 size = Vector3(0.1, 0.35, 0.75)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_nmq7v"]
-radius = 2.0
 
 [node name="Player" type="CharacterBody3D"]
 floor_stop_on_slope = false
@@ -113,9 +111,16 @@ transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 
 [node name="ThirdPersonCamera" type="Camera3D" parent="CameraMount"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 
-[node name="ObjectDetector" type="Area3D" parent="."]
+[node name="InteractRay" type="RayCast3D" parent="CameraMount"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, -0.173648, 0, 0.173648, 0.984808, 0.0030551, -0.551565, -0.0979376)
+target_position = Vector3(0, 0, -2)
+script = ExtResource("2_oyf6v")
 
-[node name="DetectorShape" type="CollisionShape3D" parent="ObjectDetector"]
-shape = SubResource("SphereShape3D_nmq7v")
-
-[connection signal="body_entered" from="ObjectDetector" to="." method="_on_object_detector_body_entered"]
+[node name="Prompt" type="Label" parent="CameraMount/InteractRay"]
+offset_left = 592.0
+offset_top = 334.0
+offset_right = 688.0
+offset_bottom = 386.0
+text = "This is a test
+[E]"
+horizontal_alignment = 1
