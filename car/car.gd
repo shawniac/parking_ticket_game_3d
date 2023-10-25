@@ -32,10 +32,12 @@ func _physics_process(delta: float) -> void:
 
         # handbrake
         if Input.is_action_pressed("handbrake"):
-            linear_velocity = Vector3.ZERO
+            brake = 1
+        else:
+            brake = 0
 
         # apply torque
         var rpm: float = abs($WheelRearLeft.get_rpm())
-        engine_force = acceleration * max_torque * ( 1 - rpm/max_rpm )
+        engine_force = acceleration * max_torque * ( 1 - rpm/max_rpm ) * 0.5
     else:
         engine_force = 0.0

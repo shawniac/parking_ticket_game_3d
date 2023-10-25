@@ -3,6 +3,8 @@ extends CharacterBody3D
 # node variables
 @onready var camera_mount := $CameraMount
 @onready var camera := $CameraMount/ThirdPersonCamera
+@onready var camera_imagetexture := %CameraImagetexture
+
 var current_car: Object
 
 # physics constants
@@ -42,6 +44,8 @@ func _unhandled_input(event: InputEvent) -> void:
         get_tree().reload_current_scene()
     elif event.is_action_pressed("emergency_kill"):
         get_tree().quit()
+    elif event.is_action_pressed("take_picture"):
+        camera_imagetexture.texture = camera.get_viewport().get_texture()
 
     if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
         if not is_inside_car:
