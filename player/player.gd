@@ -3,8 +3,8 @@ extends CharacterBody3D
 # node variables
 @onready var camera_mount := $CameraMount
 @onready var camera := $CameraMount/ThirdPersonCamera
-@onready var camera_imagetexture := %CameraImagetexture
 
+@onready var picture_sprite: Sprite3D = $Sprite3D
 var current_car: Object
 
 # physics constants
@@ -45,7 +45,7 @@ func _unhandled_input(event: InputEvent) -> void:
     elif event.is_action_pressed("emergency_kill"):
         get_tree().quit()
     elif event.is_action_pressed("take_picture"):
-        camera_imagetexture.texture = camera.get_viewport().get_texture()
+        take_picture()
 
     if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
         if not is_inside_car:
@@ -87,6 +87,24 @@ func _physics_process(delta: float) -> void:
         velocity.z = move_toward(velocity.z, 0, SPEED)
 
     move_and_slide()
+
+
+func take_picture() -> void:
+    print("snapping pic")
+
+    await RenderingServer.frame_post_draw
+    var picture = get_viewport().get_texture().get_image()
+
+    #picture.save_webp("res://picture.webp")
+
+    print("picture taken")
+
+    var picture_texture = ImageTexture.new()
+    picture_texture.create_from_image(picture)
+
+    picture_sprite.texture = picture_texture
+
+    print("picture saved")
 
 
 func leave_car() -> void:

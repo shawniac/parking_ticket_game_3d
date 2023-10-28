@@ -10,7 +10,7 @@
 [ext_resource type="ArrayMesh" uid="uid://c83nqlhrbj2j7" path="res://addons/kaykit_city_builder_bits/Assets/obj/building_B.obj" id="7_js20m"]
 [ext_resource type="ArrayMesh" uid="uid://bowf7cyw67k4d" path="res://addons/kaykit_city_builder_bits/Assets/obj/building_C.obj" id="8_307br"]
 [ext_resource type="ArrayMesh" uid="uid://in3k46dkh72e" path="res://addons/kaykit_city_builder_bits/Assets/obj/building_G.obj" id="9_wnq66"]
-[ext_resource type="Texture2D" uid="uid://ffiieiqbr2wu" path="res://assets/icon.svg" id="11_4m5vh"]
+[ext_resource type="PackedScene" uid="uid://b2y1qnjbn1ybh" path="res://ui/ui.tscn" id="11_la1tv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ssbfq"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -317,20 +317,10 @@ transform = Transform3D(0.153947, 0, 0.127673, 0, 0.2, 0, -0.127673, 0, 0.153947
 [node name="Car" parent="." instance=ExtResource("2_87y8w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.237981, -2)
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" parent="." instance=ExtResource("11_la1tv")]
 
-[node name="CameraImage" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Camera3D" parent="UI/Minimap/TextureRect/SubViewportContainer/SubViewport" index="0"]
+_follow_scan_radius = 8.0
+_target = NodePath("../../../../../../Player")
 
-[node name="CameraImageBackground" type="TextureRect" parent="UI/CameraImage"]
-offset_right = 128.0
-offset_bottom = 128.0
-texture = ExtResource("11_4m5vh")
-
-[node name="CameraImagetexture" type="TextureRect" parent="UI/CameraImage"]
-unique_name_in_owner = true
-offset_right = 40.0
-offset_bottom = 40.0
+[editable path="UI"]

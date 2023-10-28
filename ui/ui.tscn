@@ -1,19 +1,45 @@
-[gd_scene load_steps=2 format=3 uid="uid://b2y1qnjbn1ybh"]
+[gd_scene load_steps=5 format=3 uid="uid://b2y1qnjbn1ybh"]
 
+[ext_resource type="Texture2D" uid="uid://ffiieiqbr2wu" path="res://assets/icon.svg" id="1_b4pjy"]
 [ext_resource type="Script" path="res://ui/minimap.gd" id="2_g7wji"]
+[ext_resource type="Shader" path="res://ui/minimap.gdshader" id="2_w6iaq"]
 
-[node name="Control" type="Control"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ax8ej"]
+shader = ExtResource("2_w6iaq")
+shader_parameter/radius = 1.0
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="Minimap" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Minimap" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="Minimap"]
 layout_mode = 0
-offset_left = 42.0
-offset_top = 770.0
-offset_right = 310.0
-offset_bottom = 1038.0
+offset_left = 1632.0
+offset_top = 32.0
+offset_right = 1888.0
+offset_bottom = 288.0
+texture = ExtResource("1_b4pjy")
+metadata/_edit_group_ = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Minimap/TextureRect"]
+material = SubResource("ShaderMaterial_ax8ej")
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 252.0
+offset_bottom = 252.0
+
+[node name="SubViewport" type="SubViewport" parent="Minimap/TextureRect/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(248, 248)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Minimap/TextureRect/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+projection = 1
+size = 8.0
 script = ExtResource("2_g7wji")

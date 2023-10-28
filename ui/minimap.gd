@@ -1,17 +1,15 @@
-extends TextureRect
+extends Camera3D
 
-var minimap_texture: Texture
-var player: Node
+@export var _follow_scan_radius : float
+@export var _target : NodePath
+
+var target : Node
+
+func _ready() -> void:
+    size = _follow_scan_radius
+    target = get_node(_target)
 
 
-func _ready():
-    player = get_node("/root/Player")
-
-
-func _draw():
-    # Draw the minimap texture.
-    draw_texture(minimap_texture, Vector2.ZERO)
-
-    # Draw the player's position on the minimap.
-    var player_position = player.get_global_position()
-    draw_circle(player_position, 5, Color.RED)
+func _process(_delta: float) -> void:
+    position = Vector3(target.position.x, 32, target.position.z)
+    rotation_degrees.y = target.rotation_degrees.y

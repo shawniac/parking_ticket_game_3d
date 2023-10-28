@@ -1,7 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://s01udkh8qwlg"]
+[gd_scene load_steps=16 format=3 uid="uid://s01udkh8qwlg"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_f41qd"]
 [ext_resource type="Script" path="res://player/interactray.gd" id="2_oyf6v"]
+[ext_resource type="Texture2D" uid="uid://ffiieiqbr2wu" path="res://assets/icon.svg" id="3_7sqd5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3p2pt"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_svhep"]
 
@@ -22,8 +25,6 @@ outer_radius = 0.066
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_funq8"]
 radius = 0.1
 height = 0.5
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3p2pt"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ri4ki"]
 size = Vector3(0.15, 0.15, 0.5)
@@ -46,6 +47,9 @@ size = Vector3(0.1, 0.35, 0.75)
 [node name="Player" type="CharacterBody3D"]
 floor_stop_on_slope = false
 script = ExtResource("1_f41qd")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_3p2pt")
 
 [node name="BodyParts" type="Node3D" parent="."]
 
@@ -89,9 +93,6 @@ mesh = SubResource("CapsuleMesh_funq8")
 transform = Transform3D(0.981437, 0.191785, 0, -0.191785, 0.981437, 0, 0, 0, 1, -0.43142, -0.765714, -0.0504146)
 mesh = SubResource("CapsuleMesh_funq8")
 
-[node name="Collision" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_3p2pt")
-
 [node name="Gun" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 1.49012e-08, 0, -1.49012e-08, 1, 0.301335, 0.224111, -0.535277)
 mesh = SubResource("BoxMesh_ri4ki")
@@ -117,10 +118,14 @@ target_position = Vector3(0, 0, -2)
 script = ExtResource("2_oyf6v")
 
 [node name="Prompt" type="Label" parent="CameraMount/InteractRay"]
-offset_left = 592.0
-offset_top = 334.0
-offset_right = 688.0
-offset_bottom = 386.0
+offset_left = 912.0
+offset_top = 514.0
+offset_right = 1008.0
+offset_bottom = 566.0
 text = "This is a test
 [E]"
 horizontal_alignment = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.355247, 0.503472)
+texture = ExtResource("3_7sqd5")
