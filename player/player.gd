@@ -100,7 +100,8 @@ func take_picture() -> void:
     print("picture taken")
 
     var picture_texture = ImageTexture.new()
-    picture_texture.create_from_image(picture)
+    picture_texture = ImageTexture.create_from_image(picture)
+    picture_texture.set_size_override(Vector2(128, 128))
 
     picture_sprite.texture = picture_texture
 
