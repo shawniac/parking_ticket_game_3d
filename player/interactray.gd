@@ -13,7 +13,10 @@ func _physics_process(_delta: float) -> void:
         var detected_object = get_collider()
 
         if detected_object.has_method("use"):
-            prompt.text = detected_object.name
+            set_prompt_text(detected_object.name)
 
             if Input.is_action_just_pressed("use"):
                 detected_object.use(owner)
+
+func set_prompt_text(object_name: String) -> void:
+    prompt.text = object_name

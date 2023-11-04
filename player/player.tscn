@@ -122,8 +122,8 @@ offset_left = 912.0
 offset_top = 514.0
 offset_right = 1008.0
 offset_bottom = 566.0
-text = "This is a test
-[E]"
+text = "Enter Car
+Press [E]"
 horizontal_alignment = 1
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
