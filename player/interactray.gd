@@ -18,5 +18,6 @@ func _physics_process(_delta: float) -> void:
             if Input.is_action_just_pressed("use"):
                 detected_object.use(owner)
 
+
 func set_prompt_text(object_name: String) -> void:
     prompt.text = object_name

@@ -1,8 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://s01udkh8qwlg"]
+[gd_scene load_steps=21 format=3 uid="uid://s01udkh8qwlg"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_f41qd"]
 [ext_resource type="Script" path="res://player/interactray.gd" id="2_oyf6v"]
 [ext_resource type="Texture2D" uid="uid://ffiieiqbr2wu" path="res://assets/icon.svg" id="3_7sqd5"]
+[ext_resource type="FontFile" uid="uid://c4mm3of2mc8o5" path="res://addons/phantom_camera/fonts/Nunito-Black.ttf" id="3_61pk3"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="5_go2ry"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_1507w"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3p2pt"]
 
@@ -44,6 +47,19 @@ albedo_color = Color(0, 0.0705882, 1, 1)
 material = SubResource("StandardMaterial3D_yaac8")
 size = Vector3(0.1, 0.35, 0.75)
 
+[sub_resource type="LabelSettings" id="LabelSettings_vw7bm"]
+line_spacing = 2.0
+font = ExtResource("3_61pk3")
+font_size = 21
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_ququw"]
+script = ExtResource("6_1507w")
+duration = 0.3
+transition = 1
+ease = 2
+
 [node name="Player" type="CharacterBody3D"]
 floor_stop_on_slope = false
 script = ExtResource("1_f41qd")
@@ -51,66 +67,71 @@ script = ExtResource("1_f41qd")
 [node name="Collision" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_3p2pt")
 
-[node name="BodyParts" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="."]
+unique_name_in_owner = true
 
-[node name="Torso" type="MeshInstance3D" parent="BodyParts"]
+[node name="Torso" type="MeshInstance3D" parent="Model"]
 mesh = SubResource("CapsuleMesh_svhep")
 skeleton = NodePath("../..")
 
-[node name="ButtLeft" type="MeshInstance3D" parent="BodyParts"]
+[node name="ButtLeft" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, -0.1, -0.25, 0.5)
 mesh = SubResource("SphereMesh_j073e")
 skeleton = NodePath("../../..")
 
-[node name="ButtRight" type="MeshInstance3D" parent="BodyParts"]
+[node name="ButtRight" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0.1, -0.25, 0.5)
 mesh = SubResource("SphereMesh_j073e")
 skeleton = NodePath("../../..")
 
-[node name="EyeRight" type="MeshInstance3D" parent="BodyParts"]
+[node name="EyeRight" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.15, 0.55, -0.45)
 mesh = SubResource("SphereMesh_j073e")
 skeleton = NodePath("../..")
 
-[node name="EyeLeft" type="MeshInstance3D" parent="BodyParts"]
+[node name="EyeLeft" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.15, 0.55, -0.45)
 mesh = SubResource("SphereMesh_j073e")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="BodyParts"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.437026, -0.500253)
 mesh = SubResource("CapsuleMesh_jf8pq")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="BodyParts"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.300514, -0.523789)
 mesh = SubResource("TorusMesh_auf1j")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="BodyParts"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.991644, -0.129003, 0, 0.129003, 0.991644, 0, 0, 0, 1, 0.442322, -0.765714, -0.0504146)
 mesh = SubResource("CapsuleMesh_funq8")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="BodyParts"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.981437, 0.191785, 0, -0.191785, 0.981437, 0, 0, 0, 1, -0.43142, -0.765714, -0.0504146)
 mesh = SubResource("CapsuleMesh_funq8")
 
-[node name="Gun" type="MeshInstance3D" parent="."]
+[node name="Gun" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.49012e-08, 0, -1.49012e-08, 1, 0.301335, 0.224111, -0.535277)
 mesh = SubResource("BoxMesh_ri4ki")
+skeleton = NodePath("../..")
 
-[node name="Hat" type="MeshInstance3D" parent="."]
+[node name="Hat" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00872, 0)
 mesh = SubResource("CylinderMesh_30io7")
+skeleton = NodePath("../..")
 
-[node name="Rim" type="MeshInstance3D" parent="Hat"]
+[node name="Rim" type="MeshInstance3D" parent="Model/Hat"]
 transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 1, 1.91069e-15, -4.37114e-08, 0, -1, -4.37114e-08, 0, -0.143424, -0.424074)
 mesh = SubResource("PrismMesh_wtav0")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
+
+[node name="PictureFrame" type="Sprite3D" parent="Model"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.355247, 0.503472)
+texture = ExtResource("3_7sqd5")
 
 [node name="CameraMount" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -0.0030551, 1, 0.000671625)
-
-[node name="ThirdPersonCamera" type="Camera3D" parent="CameraMount"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 
 [node name="InteractRay" type="RayCast3D" parent="CameraMount"]
 transform = Transform3D(1, 0, 0, 0, 0.984808, -0.173648, 0, 0.173648, 0.984808, 0.0030551, -0.551565, -0.0979376)
@@ -120,12 +141,30 @@ script = ExtResource("2_oyf6v")
 [node name="Prompt" type="Label" parent="CameraMount/InteractRay"]
 offset_left = 912.0
 offset_top = 514.0
-offset_right = 1008.0
-offset_bottom = 566.0
+offset_right = 1027.0
+offset_bottom = 581.0
 text = "Enter Car
 Press [E]"
+label_settings = SubResource("LabelSettings_vw7bm")
 horizontal_alignment = 1
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.355247, 0.503472)
-texture = ExtResource("3_7sqd5")
+[node name="PlayerPhantomCamera3D" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.85, 0.866025)
+script = ExtResource("5_go2ry")
+priority_override = false
+priority = 0
+follow_mode = 6
+follow_target = NodePath("../Player")
+follow_parameters/spring_arm/spring_length = 1.0
+follow_parameters/spring_arm/collision_mask = 1
+follow_parameters/spring_arm/shape = null
+follow_parameters/spring_arm/margin = 0.2
+follow_parameters/target_offset = Vector3(0, 0, 0)
+follow_parameters/damping = true
+follow_parameters/damping_value = 10.0
+look_at_mode = 0
+tween_parameters = SubResource("Resource_ququw")
+tween_on_load = false
+inactive_update_mode = 0
+camera_3D_resource = null
