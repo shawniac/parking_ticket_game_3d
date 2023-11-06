@@ -74,16 +74,6 @@ unique_name_in_owner = true
 mesh = SubResource("CapsuleMesh_svhep")
 skeleton = NodePath("../..")
 
-[node name="ButtLeft" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, -0.1, -0.25, 0.5)
-mesh = SubResource("SphereMesh_j073e")
-skeleton = NodePath("../../..")
-
-[node name="ButtRight" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0.1, -0.25, 0.5)
-mesh = SubResource("SphereMesh_j073e")
-skeleton = NodePath("../../..")
-
 [node name="EyeRight" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.15, 0.55, -0.45)
 mesh = SubResource("SphereMesh_j073e")
@@ -94,19 +84,19 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.15, 0.55, -0.45)
 mesh = SubResource("SphereMesh_j073e")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+[node name="Nose" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.437026, -0.500253)
 mesh = SubResource("CapsuleMesh_jf8pq")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
+[node name="Mouth" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.300514, -0.523789)
 mesh = SubResource("TorusMesh_auf1j")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
+[node name="LegRight" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.991644, -0.129003, 0, 0.129003, 0.991644, 0, 0, 0, 1, 0.442322, -0.765714, -0.0504146)
 mesh = SubResource("CapsuleMesh_funq8")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
+[node name="LegLeft" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.981437, 0.191785, 0, -0.191785, 0.981437, 0, 0, 0, 1, -0.43142, -0.765714, -0.0504146)
 mesh = SubResource("CapsuleMesh_funq8")
 
@@ -150,7 +140,7 @@ horizontal_alignment = 1
 
 [node name="PlayerPhantomCamera3D" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.85, 0.866025)
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1.85, 2.86602)
 script = ExtResource("5_go2ry")
 priority_override = false
 priority = 0
